@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Dutch Artists</title>
+    <link href="css\site.css" rel="stylesheet" />
+</head>
+<body>
+    <h2>Dutch Artists</h2>
+    <div class="product-info">
+
+        <img src="\img\VanGogh.jpg" />
+
+        <h3>Mug</h3>
+        <ul class="product-props">
+            <li>Price: $9.99</li>
+            <li>Artist: Van Gogh</li>
+            <li>Title: </li>
+            <li>Description: Self-Potrait</li>
+
+        </ul>
+        <button id="buyButton">Buy</button>
+    </div>
+    <div id="theForm">
+        <form>
+            <label>Your Name:</label><br />
+            <input /><br />
+
+            <label>Email:</label><br />
+            <input type="email" /><br />
+
+            <label>Subject:</label><br />
+            <input /><br />
+
+            <label>Message</label><br />
+            <textarea rows="4"></textarea><br />
+
+            <input type="submit" value="Send Message" />
+
+        </form>
+    </div>
+    <div>
+        <div id="loginToggel">Login</div>
+        <form class="popup-form">
+            <div>
+        <label>Username</label>
+        <input type="text" /></div>
+        <div>
+        <label>Password</label>
+        <input type="password"/>
+        </div>
+            <div id="loginCheckbox">
+        <input type="checkbox" id="inputCheckbox" />
+             <label name="nameCheckbox">Remember Me</label>
+                </div>
+            <div>
+                <input type="submit" value="Login" />
+
+            </div>
+            </form>
+    </div>
+    <script src="node_modules\jquery\dist\jquery.min.js"></script>
+    <script src="js\index.js"></script>
+
+</body>
+</html>
