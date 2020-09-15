@@ -9,6 +9,5 @@
     "jquery-validation-unobtrusive": "3.2.10",
     "font-awesome": "4.7.0"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }
