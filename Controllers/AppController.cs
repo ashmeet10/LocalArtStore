@@ -1,24 +1,32 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DutchTreat.Data;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebApplication1.Services;
-using WebApplication1.ViewModel;
+using WebApplication1.ViewModels;
 
 namespace WebApplication1.Controllers
 {
     public class AppController: Controller
     {
         private readonly IMailService _mailService;
-        public AppController(IMailService mailService)
+        private readonly DutchContext _ctx;
+        private readonly IDutchRepository _repository;
+
+        public AppController(IMailService mailService,DutchContext ctx,IDutchRepository repository)
         {
             _mailService = mailService;
+            _ctx = ctx;
+            _repository = repository;
         }
         public IActionResult Index()
         {
             //throw new InvalidOperationException();
-            ViewBag.Title = "Home Page";
+            // ViewBag.Title = "Home Page";
+            var results = _ctx.Products.ToList();
             return View();
         }
         [HttpGet("contact")]
@@ -48,6 +56,22 @@ namespace WebApplication1.Controllers
         {
             ViewBag.Title = "About Us";
             return View();
+        }
+        [Authorize]
+        public IActionResult Shop()
+        {
+            //var result = _context.Products
+            //  .OrderBy(p =>p.Category)
+            //  .ToList();
+
+            //var results = from p in _ctx.Products
+            //            orderby p.Category
+            //select p;
+            //return View(results.ToList());
+
+            var result = _repository.GetAllProducts();
+            return View(result);
+
         }
     }
 }
