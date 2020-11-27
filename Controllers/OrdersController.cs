@@ -6,11 +6,9 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 
@@ -20,7 +18,7 @@ namespace DutchTreat.Controllers
     [Route("api/[Controller]")]
     [ApiController]
     [Produces("application/json")]
-    [Authorize(AuthenticationSchemes =JwtBearerDefaults.AuthenticationScheme)]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class OrdersController : ControllerBase
     {
         private readonly IDutchRepository _repository;
@@ -39,9 +37,8 @@ namespace DutchTreat.Controllers
             _userManger = userManger;
 
         }
+
         [HttpGet]
-        [ProducesResponseType(200)]
-        [ProducesResponseType(400)]
         public ActionResult Get(bool includeItems = true)
         {
             try
@@ -50,10 +47,10 @@ namespace DutchTreat.Controllers
                 var results = _repository.GetAllOrdersByUser(username, includeItems);
                 return Ok(_mapper.Map<IEnumerable<Order>, IEnumerable<OrderViewModel>>(results));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                _logger.LogError($"Failed to get orders:{ex}");
-                return  BadRequest("Failed to get orders");
+                _logger.LogError($"Failed to get orders:{ex.Message}");
+                return BadRequest("Failed to get orders");
             }
         }
 
@@ -64,21 +61,22 @@ namespace DutchTreat.Controllers
         {
             try
             {
-                var order =_repository.GetOrderById(User.Identity.Name, id);
+                var order = _repository.GetOrderById(User.Identity.Name, id);
 
                 if (order != null)
-                    return Ok(_mapper.Map<Order,OrderViewModel>(order));
+                    return Ok(_mapper.Map<Order, OrderViewModel>(order));
                 else
                     return NotFound();
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Failed to get orders:{ex}");
+                _logger.LogError($"Failed to get orders : {ex.Message}");
                 return BadRequest("Failed to get orders");
             }
         }
+
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody]OrderViewModel model)
+        public async Task<ActionResult> Post([FromBody] OrderViewModel model)
         {
             //add it to the database
 
@@ -87,13 +85,13 @@ namespace DutchTreat.Controllers
                 if (ModelState.IsValid)
                 {
                     var newOrder = _mapper.Map<OrderViewModel, Order>(model);
-                        /*new Order()
-                    {
-                        OrderDate = model.OrderDate,
-                        OrderNumber=model.OrderNumber,
-                        Id=model.OrderId
-                    };*/
-                    if(newOrder.OrderDate==DateTime.MinValue)
+                    /*new Order()
+                {
+                    OrderDate = model.OrderDate,
+                    OrderNumber=model.OrderNumber,
+                    Id=model.OrderId
+                };*/
+                    if (newOrder.OrderDate == DateTime.MinValue)
                     {
                         newOrder.OrderDate = DateTime.Now;
                     }
@@ -111,7 +109,7 @@ namespace DutchTreat.Controllers
                              OrderNumber = newOrder.OrderNumber
                          };*/
                         // return Created($"/api/orders/{vm.OrderId}", vm);
-                         return Created($"/api/orders/{newOrder.Id}", _mapper.Map<Order , OrderViewModel>(newOrder));
+                        return Created($"/api/orders/{newOrder.Id}", _mapper.Map<Order, OrderViewModel>(newOrder));
 
                     }
                 }
@@ -122,7 +120,7 @@ namespace DutchTreat.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Failed to save a new order: {ex}");
+                _logger.LogError($"Failed to save a new order: {ex.Message}");
             }
             return BadRequest("Failed to save new order");
         }

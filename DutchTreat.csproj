@@ -2,17 +2,24 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Remove="bin\**" />
+    <Compile Remove="dutch-app\**" />
     <Compile Remove="obj\**" />
     <Content Remove="bin\**" />
+    <Content Remove="dutch-app\**" />
     <Content Remove="obj\**" />
     <EmbeddedResource Remove="bin\**" />
+    <EmbeddedResource Remove="dutch-app\**" />
     <EmbeddedResource Remove="obj\**" />
     <None Remove="bin\**" />
+    <None Remove="dutch-app\**" />
     <None Remove="obj\**" />
+    <TypeScriptCompile Remove="dutch-app\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,6 +47,10 @@
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.8" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.9" />
+    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="4.1.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="OdeToCode.UseNodeModules" Version="3.0.0" />
   </ItemGroup>
 

@@ -23,15 +23,15 @@
                     <li class="nav-item"><a class="nav-link" asp-controller="App" asp-action="Shop">Shop</a></li>
                     @if (User.Identity.IsAuthenticated)
                     {
-                      <li class="nav-item"><a class="nav-link" asp-controller="Account" asp-action="Logout">Logout</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Account" asp-action="Logout">Logout</a></li>
 
                     }
                     else
                     {
-                      <li class="nav-item"><a class="nav-link" asp-controller="Account" asp-action="Login">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" asp-controller="Account" asp-action="Login">Login</a></li>
                     }
                 </ul>
-                </div>
+            </div>
         </nav>
     </header>
     <section class="container">
@@ -39,7 +39,8 @@
         @RenderBody()
     </section>
     <footer class="container">
-    <div class="text-center">Copyright 2017 Dutch Treat LLC</div></footer>
+        <div class="text-center">Copyright 2017 Dutch Treat LLC</div>
+    </footer>
 
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

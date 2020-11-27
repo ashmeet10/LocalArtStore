@@ -13,7 +13,7 @@ namespace DutchTreat.Data
         private readonly DutchContext _ctx;
         private readonly ILogger<DutchRepository> _logger;
 
-        public DutchRepository(DutchContext ctx,ILogger<DutchRepository> logger)
+        public DutchRepository(DutchContext ctx, ILogger<DutchRepository> logger)
         {
             _ctx = ctx;
             _logger = logger;
@@ -22,7 +22,8 @@ namespace DutchTreat.Data
         public IEnumerable<Order> GetAllOrders(bool includeItems)
         {
             try
-            { if (includeItems)
+            {
+                if (includeItems)
                 {
                     _logger.LogInformation("GetAllOrders got called");
 
@@ -56,19 +57,19 @@ namespace DutchTreat.Data
                             .OrderBy(p => p.Title)
                             .ToList();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError($"Failed to get all products{ex}");
                 return null;
             }
         }
 
-        public Order GetOrderById(string username , int id)
+        public Order GetOrderById(string username, int id)
         {
             return _ctx.Orders
                         .Include(o => o.Items)
                         .ThenInclude(i => i.Product)
-                        .Where(o =>o.Id == id && o.User.UserName == username)
+                        .Where(o => o.Id == id && o.User.UserName == username)
                         .FirstOrDefault();
         }
 
@@ -80,7 +81,7 @@ namespace DutchTreat.Data
         }
         public bool SaveAll()
         {
-           return _ctx.SaveChanges() > 0;
+            return _ctx.SaveChanges() > 0;
         }
 
         public void AddEntity(object model)
@@ -99,7 +100,7 @@ namespace DutchTreat.Data
 
                     //return _ctx.Orders.ToList();
                     return _ctx.Orders
-                                .Where(o=>o.User.UserName == username)
+                                .Where(o => o.User.UserName == username)
                                 .Include(o => o.Items)
                                 .ThenInclude(i => i.Product)
                                 .ToList();
@@ -117,8 +118,5 @@ namespace DutchTreat.Data
                 return null;
             }
         }
-
-        
     }
-    
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using DutchTreat.Data;
 using DutchTreat.Data.Entities;
 using DutchTreat.ViewModels;
@@ -11,6 +6,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DutchTreat.Controllers
 {
@@ -33,10 +30,11 @@ namespace DutchTreat.Controllers
             _logger = logger;
             _mapper = mapper;
         }
+
         [HttpGet]
         public IActionResult Get(int orderId)
         {
-            var order = _repository.GetOrderById(User.Identity.Name , orderId);
+            var order = _repository.GetOrderById(User.Identity.Name, orderId);
             if (order != null)
                 return Ok(_mapper.Map<IEnumerable<OrderItem>, IEnumerable<OrderItemViewModel>>(order.Items));
             return NotFound();
@@ -45,7 +43,7 @@ namespace DutchTreat.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int orderId, int id)
         {
-            var order = _repository.GetOrderById(User.Identity.Name , orderId);
+            var order = _repository.GetOrderById(User.Identity.Name, orderId);
             if (order != null)
             {
                 var item = order.Items.Where(i => i.Id == id).FirstOrDefault();

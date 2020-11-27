@@ -6,7 +6,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
@@ -89,10 +88,11 @@ namespace DutchTreat.Controllers
                         // create the token
                         var claims = new[]
                         {
-                            new Claim(JwtRegisteredClaimNames.Sub,user.Email),
-                            new Claim(JwtRegisteredClaimNames.Jti , Guid.NewGuid().ToString()),
-                            //new Claim(JwtRegisteredClaimNames.UniqueName,user.UserName)
+                            new Claim(JwtRegisteredClaimNames.Sub, user.Email),
+                            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                            new Claim(JwtRegisteredClaimNames.UniqueName, user.UserName)
                         };
+
                         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]));
                         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 

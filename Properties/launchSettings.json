@@ -2,6 +2,10 @@
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
+    "iis": {
+      "applicationUrl": "http://localhost/DutchTreat",
+      "sslPort": 0
+    },
     "iisExpress": {
       "applicationUrl": "http://localhost:8888",
       "sslPort": 0
