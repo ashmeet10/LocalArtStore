@@ -69,9 +69,9 @@ namespace WebApplication1.Controllers
             //select p;
             //return View(results.ToList());
 
-            var result = _repository.GetAllProducts();
-            return View(result);
-
+            // var result = _repository.GetAllProducts();
+            //return View(result);
+            return View();
         }
     }
 }
