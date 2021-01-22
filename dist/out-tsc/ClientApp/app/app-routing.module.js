@@ -6,7 +6,11 @@ let AppRoutingModule = class AppRoutingModule {
 };
 AppRoutingModule = __decorate([
     NgModule({
-        imports: [RouterModule.forRoot(routes)],
+        imports: [RouterModule.forRoot(routes, {
+                useHash: true,
+                enableTracing: false
+            })
+        ],
         exports: [RouterModule]
     })
 ], AppRoutingModule);

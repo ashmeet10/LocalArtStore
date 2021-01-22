@@ -99,7 +99,8 @@ namespace DutchTreat.Controllers
                     var currentUser = await _userManger.FindByNameAsync(User.Identity.Name);
                     newOrder.User = currentUser;
 
-                    _repository.AddEntity(newOrder);
+                    // _repository.AddEntity(newOrder);
+                    _repository.AddOrder(newOrder);
                     if (_repository.SaveAll())
                     {
                         /* var vm = new OrderViewModel()

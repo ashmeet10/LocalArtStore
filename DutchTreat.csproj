@@ -4,10 +4,37 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageId />
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="obj\Release\**" />
+    <Content Remove="obj\Release\**" />
+    <EmbeddedResource Remove="obj\Release\**" />
+    <None Remove="obj\Release\**" />
+    <TypeScriptCompile Remove="obj\Release\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="Controllers\OrderItem.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="gulpfile.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Remove="ClientApp\app\app-routing.module.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,6 +45,7 @@
 
   <ItemGroup>
     <Content Include="dutch-app\node_modules\dns-packet\package.json" />
+    <Content Include="gulpfile.js" />
     <Content Include="obj\Debug\netcoreapp3.1\DutchTreat.csproj.FileListAbsolute.txt" />
     <Content Include="obj\DutchTreat.csproj.nuget.dgspec.json" />
     <Content Include="obj\project.assets.json" />
@@ -65,5 +93,11 @@
     </PackageReference>
     <PackageReference Include="OdeToCode.UseNodeModules" Version="3.0.0" />
   </ItemGroup>
+
+  <Target Name="MyPublishScripts" BeforeTargets="BeforePublish">
+    <Exec Command="npm install" />
+    <Exec Command="gulp" />
+    <Exec Command="ng build" />
+  </Target>
 
 </Project>

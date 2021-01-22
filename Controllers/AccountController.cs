@@ -32,6 +32,10 @@ namespace DutchTreat.Controllers
             _config = config;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Login()
         {
             if (this.User.Identity.IsAuthenticated)
@@ -41,6 +45,11 @@ namespace DutchTreat.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
@@ -65,9 +74,15 @@ namespace DutchTreat.Controllers
             ModelState.AddModelError("", "Failed to login");
             return View();
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> Logout()
         {
+            // ... 
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "App");
         }
@@ -77,6 +92,7 @@ namespace DutchTreat.Controllers
         {
             if (ModelState.IsValid)
             {
+                // ... 
                 var user = await _userManager.FindByNameAsync(model.Username);
 
                 if (user != null)
@@ -85,7 +101,7 @@ namespace DutchTreat.Controllers
 
                     if (result.Succeeded)
                     {
-                        // create the token
+                        // ... create the token
                         var claims = new[]
                         {
                             new Claim(JwtRegisteredClaimNames.Sub, user.Email),

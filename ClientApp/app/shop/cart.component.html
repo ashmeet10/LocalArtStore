@@ -1,5 +1,6 @@
 ﻿<h3>Shopping Cart</h3>
 <div>#/Items: {{data.order.items.length}}</div>
+<div>Subtotal: {{data.order.subtotal |currency:"USD": true}}</div>
 <table class="table table-condensed table-hover">
     <thead>
         <tr>
@@ -18,3 +19,7 @@
         </tr>
     </tbody>
 </table>
+<!---<a routerLink="checkout" class="btn btn-success" *ngIf="data.order.items.length > 0">Checkout</a>-->
+
+<button routerLink="checkout" class="btn btn-success" *ngIf="data.order.items.length>0" (click)="onCheckout()">Checkout</button>
+

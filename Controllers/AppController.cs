@@ -57,7 +57,7 @@ namespace WebApplication1.Controllers
             ViewBag.Title = "About Us";
             return View();
         }
-        [Authorize]
+      //  [Authorize]
         public IActionResult Shop()
         {
             //var result = _context.Products

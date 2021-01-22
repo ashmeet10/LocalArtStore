@@ -12,11 +12,14 @@ namespace DutchTreat.Data
 
         IEnumerable<Order> GetAllOrders(bool includeItems);
         Order GetOrderById(string username, int id);
+        void AddOrder(Order newOrder);
+
         IEnumerable<Order> GetAllOrdersByUser(string username, bool includeItems);
 
 
-        void AddEntity(object model);
 
         bool SaveAll();
+        void AddEntity(object model);
+
     }
 }
