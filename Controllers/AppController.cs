@@ -38,6 +38,7 @@ namespace WebApplication1.Controllers
            return View();
         }
          [HttpPost("contact")]
+         [ValidateAntiForgeryToken]
         public IActionResult Contact(ContactViewModel model)
         {
             //ViewBag.Title = "Contact Us";
